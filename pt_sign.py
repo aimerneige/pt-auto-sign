@@ -75,8 +75,11 @@ def run_single_site(site_name: str, site_config: dict, global_headers: dict):
     session = requests.Session()
     headers = {
         "User-Agent": global_headers.get("user_agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"),
-        "Cookie": site_config["cookie"],
     }
+    if site_config.get("cookie"):
+        headers["Cookie"] = site_config["cookie"]
+    if site_config.get("authorization"):
+        headers["Authorization"] = site_config["authorization"]
 
     if not check_cookie(session, site_name, site_config, headers):
         logger.warning(f"[{site_name}] Cookie 可能已失效，跳过")

@@ -13,3 +13,9 @@ sign_url = "https://example.com/attendance.php"
 cookie = "c_secure_uid=xxx; c_secure_pass=xxx; c_secure_ssl=xxx"
 home_url = "https://example2.com/index.php"
 # sign_url 可省略，仅访问主页
+
+# 站点配置（使用 Authorization）
+[sites.OAUTH_SITE]
+authorization = "Bearer xxxxx"
+home_url = "https://example3.com/index.php"
+sign_url = "https://example3.com/attendance.php"
