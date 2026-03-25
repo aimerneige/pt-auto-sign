@@ -58,6 +58,16 @@ def check_cookie(session: requests.Session, site_name: str, site_config: dict, h
         return False
 
 
+def visit_home(session: requests.Session, site_name: str, site_config: dict, headers: dict) -> str:
+    """访问主页"""
+    try:
+        r = session.get(site_config["home_url"], headers=headers, timeout=30)
+        r.encoding = "utf-8"
+        return "访问主页成功" if "欢迎" in r.text else "访问主页成功但无法确认登录状态"
+    except Exception as e:
+        return f"访问主页失败: {e}"
+
+
 def run_single_site(site_name: str, site_config: dict, global_headers: dict):
     """处理单个站点"""
     logger.info(f"开始处理站点: {site_name}")
@@ -69,10 +79,14 @@ def run_single_site(site_name: str, site_config: dict, global_headers: dict):
     }
 
     if not check_cookie(session, site_name, site_config, headers):
-        logger.warning(f"[{site_name}] Cookie 可能已失效，跳过签到")
+        logger.warning(f"[{site_name}] Cookie 可能已失效，跳过")
         return
 
-    result = sign_in(session, site_name, site_config, headers)
+    if site_config.get("sign_url"):
+        result = sign_in(session, site_name, site_config, headers)
+    else:
+        result = visit_home(session, site_name, site_config, headers)
+
     logger.info(f"[{site_name}] {result}")
 
 
