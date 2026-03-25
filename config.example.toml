@@ -1,0 +1,14 @@
+# 全局配置
+[global]
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+
+# 站点配置
+[sites.sitename]
+cookie = "c_secure_uid=xxx; c_secure_pass=xxx; c_secure_ssl=xxx"
+home_url = "https://example.com/index.php"
+sign_url = "https://example.com/attendance.php"
+
+[sites.anothersitename]
+cookie = "c_secure_uid=xxx; c_secure_pass=xxx; c_secure_ssl=xxx"
+home_url = "https://example2.com/index.php"
+sign_url = "https://example2.com/attendance.php"
