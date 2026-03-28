@@ -54,7 +54,7 @@ def check_cookie(session: requests.Session, site_name: str, site_config: dict, h
         r = session.get(site_config["home_url"], headers=headers, timeout=30)
         r.encoding = "utf-8"
         return bool(re.search(r"欢迎", r.text))
-    except:
+    except Exception:
         return False
 
 
