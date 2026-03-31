@@ -1,3 +1,5 @@
 __pycache__/
 .venv/
 config.toml
+/pt-auto-sign
+/main.dist
